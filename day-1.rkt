@@ -6,4 +6,4 @@
                [freq 0])
       (cond
         [(eof-object? n) freq]
-        [(loop (read in) (+ freq n))]))))
+        [else (loop (read in) (+ freq n))]))))

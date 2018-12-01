@@ -13,4 +13,4 @@
 
           [(set-member? seen freq) freq]
 
-          [(loop (read in) (+ freq n) (set-add seen freq))])))))
+          [else (loop (read in) (+ freq n) (set-add seen freq))])))))
