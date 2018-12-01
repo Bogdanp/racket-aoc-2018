@@ -2,7 +2,7 @@
 
 (let outer ([freq 0]
             [seen (set)])
-  (call-with-input-file "day-1-2.txt"
+  (call-with-input-file "day-01-2.txt"
     (lambda (in)
       (let loop ([n (read in)]
                  [freq freq]
