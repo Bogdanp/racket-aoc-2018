@@ -17,8 +17,7 @@
              ([r rects]
               [x (in-range (rect-x r) (+ (rect-x r) (rect-w r)))]
               [y (in-range (rect-y r) (+ (rect-y r) (rect-h r)))])
-    (define k (cons x y))
-    (hash-set fabric k (add1 (hash-ref fabric k 0)))))
+    (hash-update fabric (cons x y) add1  0)))
 
 (define (count-square-inches fabric)
   (for/fold ([overlapping 0])
