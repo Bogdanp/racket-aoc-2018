@@ -37,4 +37,4 @@
   (for/first ([r rects] #:when (not (rect-claimed? r fabric)))
     (rect-id r)))
 
-(find-sole-claim (map string->rect (file->lines "day-03-1.txt")))
+(find-sole-claim (map string->rect (file->lines "day-03-2.txt")))
