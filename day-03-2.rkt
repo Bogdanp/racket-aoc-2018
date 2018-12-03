@@ -23,14 +23,12 @@
       [else (loop (add1 x) y)])))
 
 (define (rects->fabric rects)
-  (for/fold ([fabric (hash)])
-            ([r rects])
-    (for/fold ([fabric fabric])
-              ([x (in-range (rect-x r) (+ (rect-x r) (rect-w r)))])
-      (for/fold ([fabric fabric])
-                ([y (in-range (rect-y r) (+ (rect-y r) (rect-h r)))])
-        (define k (cons x y))
-        (hash-set fabric k (add1 (hash-ref fabric k 0)))))))
+  (for*/fold ([fabric (hash)])
+             ([r rects]
+              [x (in-range (rect-x r) (+ (rect-x r) (rect-w r)))]
+              [y (in-range (rect-y r) (+ (rect-y r) (rect-h r)))])
+    (define k (cons x y))
+    (hash-set fabric k (add1 (hash-ref fabric k 0)))))
 
 (define (find-sole-claim rects)
   (define fabric (rects->fabric rects))

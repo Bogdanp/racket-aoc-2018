@@ -13,19 +13,16 @@
         (string->number h)))
 
 (define (rects->fabric rects)
-  (for/fold ([fabric (hash)])
-            ([r rects])
-    (for/fold ([fabric fabric])
-              ([x (in-range (rect-x r) (+ (rect-x r) (rect-w r)))])
-      (for/fold ([fabric fabric])
-                ([y (in-range (rect-y r) (+ (rect-y r) (rect-h r)))])
-        (define k (cons x y))
-        (hash-set fabric k (add1 (hash-ref fabric k 0)))))))
+  (for*/fold ([fabric (hash)])
+             ([r rects]
+              [x (in-range (rect-x r) (+ (rect-x r) (rect-w r)))]
+              [y (in-range (rect-y r) (+ (rect-y r) (rect-h r)))])
+    (define k (cons x y))
+    (hash-set fabric k (add1 (hash-ref fabric k 0)))))
 
 (define (count-square-inches fabric)
   (for/fold ([overlapping 0])
-            ([(p c) (in-hash fabric)]
-             #:when (> c 1))
+            ([(p c) (in-hash fabric)] #:when (> c 1))
     (add1 overlapping)))
 
 (count-square-inches
